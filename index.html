@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Basmala Ayman — AI Engineer & Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ----- reset & base ----- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0a0b1e;
+      --bg2: #10122c;
+      --ink: #f1f2ff;
+      --muted: #a4a8cf;
+      --glass: rgba(255, 255, 255, .06);
+      --edge: rgba(255, 255, 255, .12);
+      --a: #7c5cff;
+      --b: #22d3ee;
+      --c: #ff5cae;
+      --grad: linear-gradient(120deg, #7c5cff, #22d3ee);
+      --glow1: rgba(124, 92, 255, .35);
+      --glow2: rgba(34, 211, 238, .22);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f6ff;
+        --bg2: #eceeff;
+        --ink: #14163a;
+        --muted: #555a86;
+        --glass: rgba(255, 255, 255, .75);
+        --edge: rgba(40, 40, 120, .14);
+        --a: #5b3df5;
+        --b: #0891b2;
+        --grad: linear-gradient(120deg, #5b3df5, #0891b2);
+        --glow1: rgba(124, 92, 255, .22);
+        --glow2: rgba(34, 211, 238, .18);
+      }
+    }
+
+    /* explicit light theme via attribute (no dark override) */
+    [data-theme="light"] {
+      --bg: #f5f6ff;
+      --bg2: #eceeff;
+      --ink: #14163a;
+      --muted: #555a86;
+      --glass: rgba(255, 255, 255, .75);
+      --edge: rgba(40, 40, 120, .14);
+      --a: #5b3df5;
+      --b: #0891b2;
+      --grad: linear-gradient(120deg, #5b3df5, #0891b2);
+      --glow1: rgba(124, 92, 255, .22);
+      --glow2: rgba(34, 211, 238, .18);
+    }
+
+    html {
+      scroll-padding-top: calc(var(--safe-top) + 70px);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      background-image: radial-gradient(60vw 50vh at 85% -5%, var(--glow1), transparent),
+                        radial-gradient(50vw 45vh at 0% 30%, var(--glow2), transparent);
+      background-attachment: fixed;
+      color: var(--ink);
+      font: 400 16.5px/1.65 Inter, system-ui, sans-serif;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    h1, h2, h3 {
+      font-family: Sora, Inter, system-ui, sans-serif;
+      margin: 0;
+      line-height: 1.12;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--b);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .w {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* ----- top bar ----- */
+    .top {
+      position: sticky;
+      top: var(--safe-top);
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      border-bottom: 1px solid var(--edge);
+    }
+
+    .top .w {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    .logo {
+      font: 800 1.1rem Sora, sans-serif;
+      text-decoration: none;
+    }
+
+    .top nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .top nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 99px;
+      font-size: .93rem;
+      font-weight: 500;
+    }
+
+    .top nav a:hover {
+      color: var(--ink);
+      background: var(--glass);
+    }
+
+    /* ----- hero (no avatar / picture placeholder) ----- */
+    .hero {
+      padding: 76px 0 56px;
+      display: grid;
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* removed avatar grid column — now single column */
+    .hero h1 {
+      font-weight: 800;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      letter-spacing: -.035em;
+      margin: 20px 0 14px;
+    }
+
+    .grad {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--edge);
+      background: var(--glass);
+      border-radius: 99px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 4px rgba(52, 211, 153, .2);
+    }
+
+    .role {
+      font: 600 clamp(1.15rem, 3vw, 1.6rem) Sora, sans-serif;
+      min-height: 1.4em;
+    }
+
+    .role i {
+      font-style: normal;
+      border-right: 3px solid var(--b);
+      padding-right: 3px;
+      animation: bl 1s steps(1) infinite;
+    }
+
+    @keyframes bl {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 56ch;
+      margin: 16px 0 28px;
+      font-size: 1.08rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 0 10px 10px 0;
+      transition: transform .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.p {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 10px 30px -8px var(--a);
+    }
+
+    .btn.g {
+      border: 1px solid var(--edge);
+      background: var(--glass);
+    }
+
+    /* ----- cards & sections ----- */
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--edge);
+      border-radius: 20px;
+      padding: 22px;
+      backdrop-filter: blur(8px);
+    }
+
+    section {
+      padding: 70px 0 10px;
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      letter-spacing: -.02em;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 0 0 30px;
+      max-width: 56ch;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .span2 {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .proj {
+      transition: transform .25s, border-color .25s;
+    }
+
+    .proj:hover {
+      transform: translateY(-4px);
+      border-color: var(--a);
+    }
+
+    .proj h3 {
+      font-size: 1.3rem;
+      margin: 12px 0 8px;
+    }
+
+    .proj p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .ico {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      background: var(--grad);
+    }
+
+    .proj ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .proj li {
+      margin-bottom: 6px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .chips span {
+      font-size: .8rem;
+      font-weight: 500;
+      padding: 4px 11px;
+      border-radius: 99px;
+      border: 1px solid var(--edge);
+      background: var(--glass);
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: .8rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--grad);
+      color: #fff;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .steps {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 10px;
+    }
+
+    .steps button {
+      font: 600 .9rem Inter, sans-serif;
+      color: var(--ink);
+      padding: 9px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--edge);
+      background: var(--glass);
+      cursor: pointer;
+    }
+
+    .steps button[aria-pressed="true"] {
+      background: var(--grad);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .say {
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px dashed var(--edge);
+      min-height: 3.6em;
+      color: var(--ink);
+    }
+
+    /* ----- timeline ----- */
+    .tl {
+      position: relative;
+      padding-left: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .tl::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--grad);
+      opacity: .6;
+    }
+
+    .tl .card {
+      position: relative;
+    }
+
+    .tl .card::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 28px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--b);
+    }
+
+    .tl h3 {
+      font-size: 1.2rem;
+    }
+
+    .when {
+      color: var(--b);
+      font-weight: 600;
+      font-size: .88rem;
+      margin: 4px 0 8px;
+    }
+
+    .tl ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .tl li {
+      margin-bottom: 6px;
+    }
+
+    .sk h3 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .sk .chips {
+      margin-top: 12px;
+    }
+
+    .edu {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .edu b {
+      font: 800 2.2rem Sora, sans-serif;
+    }
+
+    /* ----- footer ----- */
+    footer {
+      margin: 80px 0 0;
+      padding: 70px 0 56px;
+      text-align: center;
+      border-top: 1px solid var(--edge);
+      background: linear-gradient(180deg, transparent, var(--bg2));
+    }
+
+    footer h2 {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+    }
+
+    footer p {
+      color: var(--muted);
+      max-width: 46ch;
+      margin: 12px auto 26px;
+    }
+
+    /* ----- reveal animation ----- */
+    .js .rv {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s, transform .7s;
+    }
+
+    .js .rv.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+      .js .rv {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ----- responsive hero (no image) ----- */
+    @media (min-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        /* only text, no picture */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="w">
+      <a class="logo" href="#top"><span class="grad">B.</span>Ayman</a>
+      <nav aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="w" id="top">
+    <!-- HERO: no avatar / picture placeholder -->
+    <header class="hero">
+      <div>
+        <span class="pill">Open to AI and data roles</span>
+        <h1>Hi, I'm <span class="grad">Basmala</span></h1>
+        <div class="role"><span id="role"></span><i></i></div>
+        <p>I build machine learning, computer vision and generative AI systems, and the big-data pipelines that power them, from research all the way to production. Based in Cairo, now going deep on multi-agent systems with LangGraph.</p>
+        <a class="btn p" href="#projects">View my work</a>
+        <a class="btn g" href="mailto:basmalaayman366@gmail.com">Get in touch</a>
+      </div>
+      <!-- avatar removed completely -->
+    </header>
+
+    <section id="projects">
+      <h2>Featured projects</h2>
+      <p class="sub">Things I've built, from agentic AI to computer vision to security.</p>
+      <div class="grid">
+        <!-- project 1 -->
+        <article class="card proj span2 rv">
+          <div class="ico" aria-hidden="true">🤖</div>
+          <h3>Agentic RAG for educational consulting</h3>
+          <p>An advisor for Egyptian private schools and universities. LangGraph orchestrates a stateful three-stage multi-agent workflow instead of a linear RAG chain. Pick a stage to see what it does.</p>
+          <div class="steps" id="steps">
+            <button aria-pressed="true">Query Rewriter</button>
+            <button aria-pressed="false">Retriever</button>
+            <button aria-pressed="false">Generator</button>
+          </div>
+          <div class="say" id="say" aria-live="polite"></div>
+          <div class="chips">
+            <span>Python</span><span>LangGraph</span><span>LangChain</span><span>Gemma 3</span><span>Chroma</span><span>all-MiniLM-L6-v2</span><span>Streamlit</span>
+          </div>
+        </article>
+
+        <!-- project 2 -->
+        <article class="card proj span2 rv">
+          <div class="ico" aria-hidden="true">🛡️</div>
+          <h3>AI intrusion detection and prevention <span class="tag">Graduation project, A</span></h3>
+          <ul>
+            <li>Compared Random Forest, XGBoost and CNN classifiers on the CERT insider-threat dataset.</li>
+            <li>Prevented data leakage with duplicate detection, split-overlap checks and embedding-distance verification.</li>
+            <li>Built a live psutil monitor feeding a multi-model consensus alert system on a React.js dashboard.</li>
+          </ul>
+          <div class="chips">
+            <span>Python</span><span>TensorFlow</span><span>Scikit-learn</span><span>XGBoost</span><span>psutil</span><span>React.js</span>
+          </div>
+        </article>
+
+        <!-- project 3 -->
+        <article class="card proj rv">
+          <div class="ico" aria-hidden="true">👁️</div>
+          <h3>Multi-modal real-time perception</h3>
+          <p>Live emotion, pose, hand and object tracking. MediaPipe plus DeepFace produce gesture, posture and emotion metrics, with frame-skipping for smooth frame rates.</p>
+          <div class="chips">
+            <span>OpenCV</span><span>MediaPipe</span><span>DeepFace</span><span>TensorFlow</span><span>Streamlit</span>
+          </div>
+        </article>
+
+        <!-- project 4 -->
+        <article class="card proj rv">
+          <div class="ico" aria-hidden="true">🩻</div>
+          <h3>COVID-19 chest X-ray diagnosis</h3>
+          <p>Transfer learning on deep CNNs with data augmentation to classify COVID-19 infection from chest X-ray images.</p>
+          <div class="chips">
+            <span>TensorFlow/Keras</span><span>OpenCV</span><span>Scikit-learn</span>
+          </div>
+        </article>
+
+        <!-- project 5 -->
+        <article class="card proj span2 rv">
+          <div class="ico" aria-hidden="true">📊</div>
+          <h3>Student performance analytics dashboard</h3>
+          <p>Cleaned over 1 million student records with Python and SQL Server, wrote optimized fact-and-dimension joins, and built a Streamlit dashboard with KPIs, score trends and attendance heatmaps.</p>
+          <div class="chips">
+            <span>Python</span><span>SQL Server</span><span>Streamlit</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <p class="sub">Data engineering and applied AI in the cloud and at scale.</p>
+      <div class="tl">
+        <div class="card rv">
+          <h3>Data Engineer, Microsoft DEPI</h3>
+          <div class="when">Nov 2025 to Jul 2026</div>
+          <ul>
+            <li>Built ETL/ELT pipelines with Python, SQL, Azure Data Factory and Synapse over 10 TB+ of data, cutting query latency by 40%.</li>
+            <li>Automated ingestion, saving about 15 hours a week (60%) at 99.5% data accuracy.</li>
+            <li>Helped deliver cost-optimized Azure infrastructure for 50+ enterprise users.</li>
+          </ul>
+        </div>
+        <div class="card rv">
+          <h3>Big Data Intern, Huawei NTI</h3>
+          <div class="when">Sep 2025 to Nov 2025</div>
+          <ul>
+            <li>Engineered distributed ETL on Hadoop and Spark for 5 TB+ datasets, cutting query time from 10 minutes to 2.</li>
+            <li>Implemented Kafka streaming pipelines handling 10,000+ events per second.</li>
+            <li>Documented workflow specs and tuned cluster resource allocation.</li>
+          </ul>
+        </div>
+        <div class="card rv">
+          <h3>AI &amp; ML Trainee, Route Academy</h3>
+          <div class="when">Jul 2025 to Nov 2025</div>
+          <ul>
+            <li>Built ANN, CNN, RNN, XGBoost, Random Forest and SVM models with up to 96% accuracy.</li>
+            <li>Applied Transformer-based NLP to improve sequence modeling and text comprehension.</li>
+            <li>Automated preprocessing (+15% accuracy) and tuned hyperparameters (+20% performance).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="sub">The tools I use to take ideas from notebook to production.</p>
+      <div class="grid">
+        <div class="card sk rv">
+          <h3>Generative AI and LLMs</h3>
+          <div class="chips">
+            <span>LLMs</span><span>RAG</span><span>Transformers</span><span>Fine-tuning</span><span>Prompt engineering</span><span>Vector DBs</span><span>LangChain</span><span>LangGraph</span><span>AI agents</span>
+          </div>
+        </div>
+        <div class="card sk rv">
+          <h3>ML and computer vision</h3>
+          <div class="chips">
+            <span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>XGBoost</span><span>CNN</span><span>RNN</span><span>YOLO</span><span>OpenCV</span><span>MediaPipe</span><span>DeepFace</span><span>OCR</span><span>NLP</span>
+          </div>
+        </div>
+        <div class="card sk rv">
+          <h3>Big data and cloud</h3>
+          <div class="chips">
+            <span>Azure Data Factory</span><span>Synapse</span><span>Hadoop</span><span>Spark</span><span>Kafka</span><span>MongoDB</span><span>ETL/ELT</span><span>Data warehousing</span>
+          </div>
+        </div>
+        <div class="card sk rv">
+          <h3>Programming and MLOps</h3>
+          <div class="chips">
+            <span>Python</span><span>Pandas</span><span>NumPy</span><span>SQL</span><span>REST APIs</span><span>Docker</span><span>Airflow</span><span>Git</span><span>Streamlit</span><span>React.js</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="card edu rv">
+        <b class="grad">3.37</b>
+        <div>
+          <h3 style="font-size:1.2rem">B.Sc. Computer Science, Artificial Intelligence</h3>
+          <p style="margin:4px 0 0;color:var(--muted)">Modern University for Technology (MTI), Sep 2022 to Jun 2026. GPA 3.37 / 4.0 (Very Good). Graduation project: Excellent (A).</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="w">
+      <h2>Let's <span class="grad">work together</span></h2>
+      <p>I'm open to AI engineering and data roles and internships. Email is the quickest way to reach me.</p>
+      <a class="btn p" href="mailto:basmalaayman366@gmail.com">basmalaayman366@gmail.com</a>
+      <p style="margin:10px auto 0;font-size:.9rem">Cairo, Egypt</p>
+    </div>
+  </footer>
+
+  <script>
+    document.documentElement.classList.add("js");
+
+    // Typing effect
+    var roles = ["AI Engineer", "Data Scientist", "Generative AI builder", "Computer Vision developer"],
+        ri = 0,
+        ci = 0,
+        del = false,
+        el = document.getElementById("role");
+
+    function tick() {
+      var r = roles[ri];
+      ci += del ? -1 : 1;
+      el.textContent = r.slice(0, ci);
+      var t = del ? 40 : 80;
+      if (!del && ci == r.length) {
+        del = true;
+        t = 1400;
+      } else if (del && ci == 0) {
+        del = false;
+        ri = (ri + 1) % roles.length;
+        t = 300;
+      }
+      setTimeout(tick, t);
+    }
+
+    if (matchMedia("(prefers-reduced-motion:reduce)").matches) {
+      el.textContent = roles[0];
+    } else {
+      tick();
+    }
+
+    // Intersection Observer for reveal
+    var io = new IntersectionObserver(function(es) {
+      es.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".rv").forEach(function(n) {
+      io.observe(n);
+    });
+
+    // Interactive steps for Agentic RAG project
+    var T = [
+      "Reads the chat history and rewrites the question so it stands on its own, removing ambiguity before anything is searched.",
+      "Searches a Chroma vector database with all-MiniLM-L6-v2 embeddings and returns the 10 most relevant chunks.",
+      "Answers only from the retrieved chunks, under strict system prompts, so replies stay factual and free of hallucination."
+    ];
+    var sb = document.querySelectorAll("#steps button"),
+        say = document.getElementById("say");
+
+    function pick(i) {
+      sb.forEach(function(x, j) {
+        x.setAttribute("aria-pressed", j == i);
+      });
+      say.textContent = T[i];
+    }
+
+    sb.forEach(function(x, i) {
+      x.addEventListener("click", function() {
+        pick(i);
+      });
+    });
+    pick(0);
+  </script>
+</body>
+</html>
